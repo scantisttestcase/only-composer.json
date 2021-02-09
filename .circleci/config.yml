@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: exoplatform/jdk:8-ubuntu-1804
+
+    steps:
+      - checkout
+
+      - run: apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
+      - run: apt install curl php-cli php-mbstring git unzip php-xml php-curl -y
+      - run: curl -sS https://getcomposer.org/installer -o composer-setup.php
+      - run: php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+      - run: composer install -n --prefer-dist
+      - run: composer show --tree
